@@ -1,0 +1,30 @@
+###
+
+POST http://localhost:3567/videos
+Content-Type: application/json
+
+{
+    "title": "Video sim com notebook",
+    "description": "essa não é mais minha descrição",
+    "duration": 30
+}
+
+###
+
+GET http://localhost:3567/videos
+
+
+###
+
+PUT http://localhost:3567/videos/ff5f0405-8554-4b96-b175-0c95ddca0583
+Content-Type: application/json
+
+{
+    "title": "titulo_que_não_é_mais_titulo",
+    "description": "essa não é mais minha descrição",
+    "duration": 30
+}
+
+###
+
+DELETE http://localhost:3567/videos/3c3671d5-e476-4d2a-909b-8433d540300a
