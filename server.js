@@ -33,7 +33,7 @@ server.post('/videos', (request, reply) => {
 //Endpoint para listagem dos videos:
 //GET
 server.get('/videos', (request, reply)=>{
-//    const search = request.query.search
+    const search = request.query.search
 
     console.log(search)
     

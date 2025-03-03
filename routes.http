@@ -4,9 +4,9 @@ POST http://localhost:3333/videos
 Content-Type: application/json
 
 {
-    "title": "Video sim com notebook",
-    "description": "essa não é mais minha descrição",
-    "duration": 30
+    "title": "Teste 01",
+    "description": "É uma descrição!",
+    "duration": 392383
 }
 
 ###

@@ -11,8 +11,15 @@ export class DatabasePostgres {
     async list(search){
         //declarando
         let videos
+
         if(search){
-            videos = await sql`SELECT * FROM videos where title ilike"%${search}%"`
+            try {
+                videos = await sql`SELECT * FROM videos where title ilike ${search}`
+                res.status("200").json(videos)
+            } catch (err) {
+                console.error("Falha no Select de dados!")
+                console.error(err)
+            }
         } else {
             videos = await sql`SELECT * FROM videos`
         }
@@ -23,16 +30,17 @@ export class DatabasePostgres {
     //criando um novo elemento no database-memory
     async create(video){
         //criando um UUID para o video novo.
-        const videoId = randomUUID;
+        const videoId = randomUUID();
 
         //desestruturando os atributos recebidos por parâmetro
         const { title, description, duration } = video;
 
         try{
-            videos = await sql`INSERT INTO videos (id, title, description, duration) VALUES ("%${videoId}%", "%${title}%", "%${description}%", "%${duration}%")`
+            await sql`INSERT INTO videos (id, title, description, duration) VALUES (${videoId}, ${title}, ${description}, ${duration})`
             console.log("Insert bem sucedido!");
         } catch (err){
             console.error("Falha no insert de dados!")
+            console.error(err)
         }
     }
 
