@@ -4,10 +4,9 @@ POST http://localhost:3333/videos
 Content-Type: application/json
 
 {
-    "title": "Teste 01",
-    "description": "É uma descrição!",
-    "duration": 392383
-}
+    "title": "Teste 02",
+    "description": "Não sei se é uma descrição!",
+    "duration": 555552}
 
 ###
 
@@ -16,15 +15,15 @@ GET http://localhost:3333/videos
 
 ###
 
-PUT http://localhost:3333/videos/
+PUT http://localhost:3333/videos/710ce1a0-b8ea-41fa-a2c9-c253ce5dd3e8
 Content-Type: application/json
 
 {
-    "title": "titulo_que_não_é_mais_titulo",
-    "description": "essa não é mais minha descrição",
-    "duration": 30
+    "title": "Este era o teste_02",
+    "description": "Agora tenho certeza que isso é uma descrição!",
+    "duration": 360
 }
 
 ###
 
-DELETE http://localhost:3333/videos/289fd54b-4319-4db6-a7d1-8e23b6b47050
+DELETE http://localhost:3333/videos/710ce1a0-b8ea-41fa-a2c9-c253ce5dd3e8

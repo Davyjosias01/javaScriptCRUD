@@ -34,13 +34,9 @@ server.post('/videos', (request, reply) => {
 //GET
 server.get('/videos', (request, reply)=>{
     const search = request.query.search
-
     console.log(search)
-    
     const videos = database.list(search)
-    
     console.log(videos)
-
     return videos
 })
 
@@ -58,6 +54,7 @@ server.put('/videos/:id', (request, reply) => {
         duration
     })
 
+
     return reply.status(204).send()
 })
 
@@ -69,6 +66,7 @@ server.delete('/videos/:id', (request, reply) => {
     database.delete(videoId)
     return reply.status(204).send()
 })
+
 
 server.listen ({
     port:    3333

@@ -6,55 +6,81 @@ import { log } from "node:console"
 
 
 export class DatabasePostgres {    
-
-    //listando os elementos no banco de dados
     async list(search){
-        //declarando
+        //Declaring variables
         let videos
 
+
+        //If have been passed any parameter
         if(search){
             try {
                 videos = await sql`SELECT * FROM videos where title ilike ${search}`
+                console.log("Successful select")
                 res.status("200").json(videos)
             } catch (err) {
-                console.error("Falha no Select de dados!")
+                console.error("Unsuccessful select!")
                 console.error(err)
             }
-        } else {
+        
+        
+        } else { //If have'nt been passed any parameter
             videos = await sql`SELECT * FROM videos`
         }
+
+
         return videos;        
     }
 
 
-    //criando um novo elemento no database-memory
     async create(video){
-        //criando um UUID para o video novo.
+        //Creating a new UUID to the video
         const videoId = randomUUID();
 
-        //desestruturando os atributos recebidos por parâmetro
+
+        //Destructuring the attributes recieved like parameters
         const { title, description, duration } = video;
 
+
+        //Creating a new registration
         try{
-            await sql`INSERT INTO videos (id, title, description, duration) VALUES (${videoId}, ${title}, ${description}, ${duration})`
-            console.log("Insert bem sucedido!");
+            const result = await sql`INSERT INTO videos (id, title, description, duration) VALUES (${videoId}, ${title}, ${description}, ${duration}) RETURNING *`
+            console.log("Successful insert");
+            console.log(result)
         } catch (err){
-            console.error("Falha no insert de dados!")
+            console.error("Unsuccessful insert!")
             console.error(err)
         }
     }
 
 
-    //atualizando um elemento do database-memory
-    update(id, video){
+    async update(videoId, video){
+        //Desestruturing the atributes recieved by parameter
+        const { title, description, duration } = video
 
 
-
+        //Update the registration 
+        try {
+            const result = await sql`UPDATE videos SET title = ${title}, description = ${description}, duration = ${duration} WHERE id = ${videoId} RETURNING *`
+            console.log("Successful update");
+            console.log(result)
+        } catch (err) {
+            console.log("Unsuccessful update!");
+            console.error(err);
+        }
     }
 
 
-    //apagando um elemento do database-memory
-    delete(id){
+    async delete(id){
+        //Delete a database register
+        try {
+            const result = await sql`DELETE FROM videos WHERE id = ${id} RETURNING *`
+            console.log("Successful delete")
+            console.log(result)
+        } catch (err) {
+            console.log("Unsuccessful delete")
+            console.error(err)
+        }
+
 
 
 
