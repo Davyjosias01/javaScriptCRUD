@@ -1,6 +1,6 @@
 ###
 
-POST http://localhost:3567/videos
+POST http://localhost:3333/videos
 Content-Type: application/json
 
 {
@@ -11,12 +11,12 @@ Content-Type: application/json
 
 ###
 
-GET http://localhost:3567/videos
+GET http://localhost:3333/videos
 
 
 ###
 
-PUT http://localhost:3567/videos/ff5f0405-8554-4b96-b175-0c95ddca0583
+PUT http://localhost:3333/videos/
 Content-Type: application/json
 
 {
@@ -27,4 +27,4 @@ Content-Type: application/json
 
 ###
 
-DELETE http://localhost:3567/videos/3c3671d5-e476-4d2a-909b-8433d540300a
+DELETE http://localhost:3333/videos/289fd54b-4319-4db6-a7d1-8e23b6b47050

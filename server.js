@@ -7,9 +7,11 @@ server.listen(3333)*/
 
 import { fastify } from 'fastify'
 import { DatabaseMemory } from './database-memory.js'
+import { DatabasePostgres } from './database-postgres.js'
+
 
 const server = fastify()
-const database = new DatabaseMemory()
+const database = new DatabasePostgres()
 
 
 //Endpoint para criação de videos:
@@ -31,7 +33,7 @@ server.post('/videos', (request, reply) => {
 //Endpoint para listagem dos videos:
 //GET
 server.get('/videos', (request, reply)=>{
-    const search = request.query.search
+//    const search = request.query.search
 
     console.log(search)
     
@@ -69,7 +71,7 @@ server.delete('/videos/:id', (request, reply) => {
 })
 
 server.listen ({
-    port:    3567
+    port:    3333
 })
 
 

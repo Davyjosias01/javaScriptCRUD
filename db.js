@@ -1,16 +1,32 @@
 import 'dotenv/config';
-import pkg from 'pg';
 
-const { Pool } = pkg;
 
-const pool = new Pool({
-  connectionString: process.env.DATABASE_URL,
-  ssl: { rejectUnauthorized: false },
+//Import the "http" node.js module  
+import http from 'http';
+
+
+//import the "neon" client 
+import { neon } from '@neondatabase/serverless';
+
+
+//create a database connection using the .env url
+const sql = neon(process.env.DATABASE_URL);
+
+
+//defines a handler than will be call every request at the server
+const requestHandler = async (req, res) => {
+  const result = await sql`SELECT version()`;
+  const { version } = result[0];
+  res.writeHead(200, { "Content-Type": "text/plain" });
+  res.end(version);
+};
+
+
+//create a http server at the 3000 port
+http.createServer(requestHandler).listen(3000, () => {
+  console.log("Server running at http://localhost:3000");
 });
 
-async function connection() {
-  const client = await pool.connect();
-  return client;
-}
 
-export default connection
+//exportando o 
+export default sql;
